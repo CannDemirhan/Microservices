@@ -1,0 +1,16 @@
+server:
+  port: 8899
+
+spring:
+  application:
+    name: config-server-git
+  cloud:
+    config:
+      server:
+        git:
+          uri: "https://github.com/bilgeadamankaraboostjava3/gitconfiglist.git"
+          default-label: main
+          skip-ssl-validation: true
+          # For Private Repositories
+#          username: "GitUserName"
+#          password: "GenerateTokenForThisApplicaiton"

@@ -1,0 +1,26 @@
+spring:
+  cloud:
+    config:
+      uri: http://localhost:8899
+  application:
+    name: config-client-application
+  profiles:
+    active: properties
+  config:
+    import: "optional:configserver:"
+
+#server:
+#  port: 7090
+#
+#spring:
+#  cloud:
+#    config:
+#      enabled: false
+#myapplication:
+#  message: "Hello World from Config Client!!"
+
+# Git Respository yml file
+#server:
+#  port: 7095
+#myapplication:
+#  message: "Hello World from Config Client Git!!"

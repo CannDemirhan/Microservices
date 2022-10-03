@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-auth
+  labels:
+    team: competitiondevs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-service   
+
+  template:
+    metadata:
+      name: auth-service
+      labels:
+        app: auth-service
+
+      annotations:
+        olusturan: Can Demirhan
+        email: c@demir.com
+
+    spec:
+      containers:        
+        - image: ysfyrdmcl/questiongameauth:v002
+          name:  podauth
+          resources:
+            requests: 
+              memory: "1Gi"
+              cpu: "0.1"
+            limits:
+              memory: "2Gi"
+              cpu: "0.25"
+          ports:
+            - containerPort: 9090
+          env:
+            - name:  SERVERPORT
+              valueFrom:
+                secretKeyRef:
+                  name: secret-competition
+                  key: auth_port
+            - name: DBUSERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: secret-competition
+                  key: db_username
+            - name: DBPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secret-competition
+                  key: db_password
+            - name: DBURL
+              valueFrom:
+                secretKeyRef:
+                  name: secret-competition
+                  key: db_url
+            - name: AUTHURL
+              valueFrom:
+                secretKeyRef:
+                  name: secret-competition
+                  key: auth_url
+            - name: MAINURL
+              valueFrom:
+                secretKeyRef:
+                  name: secret-competition
+                  key: main_url
+            - name: USERURL
+              valueFrom:
+                secretKeyRef:
+                  name: secret-competition
+                  key: user_url
+            - name: CONFIGSERVER
+              valueFrom:
+                secretKeyRef:
+                  name: secret-competition
+                  key: config_server_url
